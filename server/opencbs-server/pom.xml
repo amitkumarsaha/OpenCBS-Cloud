@@ -68,6 +68,7 @@
     </dependencies>
 
     <build>
+    <pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -136,7 +137,7 @@
                         <goals>
                             <goal>exec</goal>
                         </goals>
-                        <phase>compile</phase>
+                        <!-- <phase>compile</phase> -->
                         <configuration>
                             <executable>yarn</executable>
                             <workingDirectory>${basedir}/../../client</workingDirectory>
@@ -147,7 +148,7 @@
                         <goals>
                             <goal>exec</goal>
                         </goals>
-                        <phase>compile</phase>
+                        <!-- <phase>compile</phase> -->
                         <configuration>
                             <executable>yarn</executable>
                             <arguments>
@@ -200,6 +201,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        </pluginManagement>
     </build>
 
 </project>
