@@ -8,6 +8,17 @@ import com.opencbs.core.services.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.InvalidKeyException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.security.spec.X509EncodedKeySpec;
+
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.mail.Provider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -62,21 +73,31 @@ public class TokenHelper {
         byte[] secretKey = this.secretKeyProvider.getKey();
         // TODO: For now the token does not expire, but down the road we should restrict its lifetime
         return Jwts.builder()
-                .setSubject(user.getUsername())
-                .setIssuer(ISSUER)
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .subject(user.getUsername())
+                .issuer(ISSUER)
+				.signWith(getKey(), Jwts.SIG.HS512)
                 .compact();
     }
 
     private Claims getClaimsFromToken(String token) {
         try {
-            return Jwts.parser().setSigningKey(this.secretKeyProvider.getKey()).parseClaimsJws(token).getBody();
+        	return Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token).getPayload();
+//            return Jwts.parser().setSigningKey(this.secretKeyProvider.getKey()).build().parseSignedClaims(token).getBody();
         } catch (Exception e) {
             return null;
         }
     }
 
-    private boolean IsSessionExpired(User user) {
+    private SecretKey getKey() {
+		try {
+			return SecretKeyFactory.getInstance("AES").generateSecret(new X509EncodedKeySpec(this.secretKeyProvider.getKey()));
+		} catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private boolean IsSessionExpired(User user) {
         Integer minutes = Integer.valueOf(systemSettingsService.getValueByName(SystemSettingsName.EXPIRATION_SESSION_TIME_IN_MINUTES));
         if (minutes == 0) { // session never ended
             return false;

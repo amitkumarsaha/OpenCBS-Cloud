@@ -1,11 +1,5 @@
 package com.opencbs.core.domain.customfields;
 
-import com.opencbs.core.domain.BaseEntity;
-import com.opencbs.core.domain.enums.CustomFieldType;
-import lombok.Builder;
-import lombok.Data;
-import org.hibernate.annotations.Where;
-
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
-@Data
+import org.hibernate.annotations.Where;
+
+import com.opencbs.core.domain.BaseEntity;
+import com.opencbs.core.domain.enums.CustomFieldType;
+
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Where(clause = "deleted = false")
