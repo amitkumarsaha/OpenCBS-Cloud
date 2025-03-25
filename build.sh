@@ -19,5 +19,6 @@ else
     mvn -f ./server/opencbs-savings/pom.xml clean install -DskipTests
     mvn -f ./server/opencbs-term-deposits/pom.xml clean install -DskipTests 
     mvn -f ./server/opencbs-bonds/pom.xml clean install -DskipTests
-    mvn -f ./server/opencbs-$2/pom_backend.xml clean install jar:jar -DBUILD_VERSION=$1
+	mvn -f ./server/opencbs-server/pom_backend.xml clean install jar:jar -DBUILD_VERSION=$1
+    # mvn -f ./server/opencbs-$2/pom_backend.xml clean install jar:jar -DBUILD_VERSION=$1
 fi
