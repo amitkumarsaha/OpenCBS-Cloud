@@ -2,6 +2,10 @@ package com.opencbs.core.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -21,6 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Collections.singletonList;
+
+import java.util.ArrayList;
 
 @Configuration
 @EnableSwagger2
@@ -72,5 +78,17 @@ public class SwaggerConfig {
         authorizationScopes[0] = authorizationScope;
         return Arrays.asList(new SecurityReference("apiKey",
                 authorizationScopes));
+    }
+    
+    //Fix for /v2/api-docs
+    @Bean
+    public RequestMappingHandlerAdapter requestHandler() {
+        RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> mediaTypeList = new ArrayList<>();
+        mediaTypeList.add(MediaType.APPLICATION_JSON);
+        converter.setSupportedMediaTypes(mediaTypeList);
+        adapter.getMessageConverters().add(converter);
+        return adapter;
     }
 }
