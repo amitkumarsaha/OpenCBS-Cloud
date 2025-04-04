@@ -7,18 +7,10 @@ import com.opencbs.core.services.SystemSettingsService;
 import com.opencbs.core.services.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.InvalidKeyException;
-
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.mail.Provider;
 
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -82,19 +74,13 @@ public class TokenHelper {
     private Claims getClaimsFromToken(String token) {
         try {
         	return Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token).getPayload();
-//            return Jwts.parser().setSigningKey(this.secretKeyProvider.getKey()).build().parseSignedClaims(token).getBody();
         } catch (Exception e) {
             return null;
         }
     }
 
     private SecretKey getKey() {
-		try {
-			return SecretKeyFactory.getInstance("AES").generateSecret(new X509EncodedKeySpec(this.secretKeyProvider.getKey()));
-		} catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			return null;
-		}
+        return Keys.hmacShaKeyFor(this.secretKeyProvider.getKey());
 	}
 
 	private boolean IsSessionExpired(User user) {
