@@ -48,7 +48,7 @@ public class AccountingEntryTillService {
     }
 
     public List<AccountingEntryTill> create(List<AccountingEntryTill> accountingEntryTills) {
-        return this.accountingEntryTillsRepository.save(accountingEntryTills);
+        return this.accountingEntryTillsRepository.saveAll(accountingEntryTills);
     }
 
     public String generateDocNumber() {

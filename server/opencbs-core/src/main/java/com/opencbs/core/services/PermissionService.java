@@ -35,7 +35,7 @@ public class PermissionService {
     }
 
     public List<PermissionRole> save(List<PermissionRole> permissionRoles) {
-        return this.permissionRoleRepository.save(permissionRoles);
+        return this.permissionRoleRepository.saveAll(permissionRoles);
     }
 
     @Transactional

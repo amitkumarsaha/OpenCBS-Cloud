@@ -226,6 +226,6 @@ public class AccountingEntryService {
     }
 
     public List<AccountingEntry> save(List<AccountingEntry> accountingEntries) {
-        return this.accountingEntryRepository.save(accountingEntries);
+        return this.accountingEntryRepository.saveAll(accountingEntries);
     }
 }

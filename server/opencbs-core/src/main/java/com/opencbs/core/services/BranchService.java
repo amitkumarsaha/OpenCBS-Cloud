@@ -44,7 +44,7 @@ public class BranchService {
     }
 
     public Optional<Branch> findOne(Long id) {
-        return Optional.of(this.branchRepository.findOne(id));
+        return this.branchRepository.findById(id);
     }
 
     public Page<Branch> findAll(Pageable pageable) {

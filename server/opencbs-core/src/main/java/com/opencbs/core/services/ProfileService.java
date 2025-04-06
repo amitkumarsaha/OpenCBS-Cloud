@@ -58,11 +58,11 @@ public class ProfileService extends BaseHistoryService<ProfileRepository> implem
     }
 
     public Optional<Profile> getOne(Long id) {
-        final Profile one = this.profileRepository.findOne(id);
+        final Profile one = this.profileRepository.getReferenceById(id);
         if (one==null) {
             int b= 0;
         }
-        return Optional.ofNullable(this.profileRepository.findOne(id));
+        return this.profileRepository.findById(id);
     }
 
     public Page<SimplifiedProfileAccount> getAllWithCurrentAccount(String queryString, Pageable pageable, User currentUser) {

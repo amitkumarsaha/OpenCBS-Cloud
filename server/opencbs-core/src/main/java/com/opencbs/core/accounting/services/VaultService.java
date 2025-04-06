@@ -24,7 +24,7 @@ public class VaultService {
     }
 
     public Optional<Vault> findById(long id) {
-        return Optional.ofNullable(this.vaultRepository.findOne(id));
+        return this.vaultRepository.findById(id);
     }
 
     @Transactional

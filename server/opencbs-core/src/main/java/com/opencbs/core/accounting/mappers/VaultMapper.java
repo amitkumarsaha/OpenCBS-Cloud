@@ -41,7 +41,7 @@ public class VaultMapper {
     }
 
     private Branch getBranch(long branchId) {
-        return this.branchRepository.findOne(branchId);
+        return this.branchRepository.getReferenceById(branchId);
     }
 
     private Set<Account> getAccounts(Set<Long> accountIds) {

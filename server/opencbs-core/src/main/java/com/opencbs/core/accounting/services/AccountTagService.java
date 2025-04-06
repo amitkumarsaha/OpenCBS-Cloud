@@ -27,7 +27,7 @@ public class AccountTagService {
     }
 
     public AccountTag findOne(Long accountTagId) {
-        return this.accountTagRepository.findOne(accountTagId);
+        return this.accountTagRepository.getReferenceById(accountTagId);
     }
 
     public List<AccountTag> getAll() {

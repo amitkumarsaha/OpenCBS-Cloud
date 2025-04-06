@@ -110,7 +110,7 @@ public class TillService {
     }
 
     public Optional<Till> findOne(Long id) {
-        return Optional.ofNullable(this.tillRepository.findOne(id));
+        return this.tillRepository.findById(id);
     }
 
     public Optional<Till> findByName(String name) {

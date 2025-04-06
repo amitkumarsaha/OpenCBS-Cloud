@@ -39,7 +39,7 @@ public class CurrencyService {
     }
 
     public Optional<Currency> findOne(long id) {
-        return Optional.of(this.currencyRepository.findOne(id));
+        return this.currencyRepository.findById(id);
     }
 
     @Transactional
