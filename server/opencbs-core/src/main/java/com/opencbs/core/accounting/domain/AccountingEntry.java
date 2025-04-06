@@ -36,7 +36,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AccountingEntryListener.class)
 @Table(name = "accounting_entries")
 @TypeDef(name = "ExtraJsonType", typeClass = ExtraJsonType.class)
-@SQLDelete(sql = "update accounting_entries set deleted = true where id = ?1", check = ResultCheckStyle.COUNT)
+@SQLDelete(sql = "update accounting_entries set deleted = true where id = ?1" /*, check = ResultCheckStyle.COUNT*/)
 public class AccountingEntry extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,7 +67,7 @@ public class AccountingEntry extends BaseEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Type(type = "ExtraJsonType")
+    @Type(value = ExtraJsonType.class)
     @Column(name = "extra", columnDefinition = "jsonb")
     private ExtraJson extra;
 

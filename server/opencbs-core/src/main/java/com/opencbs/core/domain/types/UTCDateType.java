@@ -1,7 +1,7 @@
 package com.opencbs.core.domain.types;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 import java.io.Serializable;
@@ -14,9 +14,13 @@ public class UTCDateType implements UserType {
 
     protected static int[] SQL_TYPES_UTC = {Types.TIMESTAMP};
 
-    @Override
     public int[] sqlTypes() {
         return SQL_TYPES_UTC;
+    }
+
+    @Override
+    public int getSqlType() {
+        return Types.TIMESTAMP;
     }
 
     protected Calendar sUTCCalendar = Calendar.getInstance();
@@ -63,19 +67,28 @@ public class UTCDateType implements UserType {
     }
 
     @Override
-    public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner) throws HibernateException, SQLException {
+    public Object nullSafeGet(ResultSet rs, int val, SharedSessionContractImplementor session, @Deprecated Object owner) throws SQLException {
+//    public Object nullSafeGet(ResultSet rs, String[] names, SessionImplementor session, Object owner) throws HibernateException, SQLException {
+//        try {
+//            if (rs.getDate(names[0]) == null)
+//                return null;
+//        } catch (Exception e) {
+//            return null;
+//        }
+
         try {
-            if (rs.getDate(names[0]) == null)
+            if (rs.getDate(val) == null)
                 return null;
         } catch (Exception e) {
             return null;
         }
 
-        return new Date(rs.getTimestamp(names[0], sUTCCalendar).getTime());
+        return new Date(rs.getTimestamp(val, sUTCCalendar).getTime());
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session) throws HibernateException, SQLException {
+    public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session) throws SQLException{
+//    public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session) throws HibernateException, SQLException {
         if (null == value) {
             st.setTimestamp(index, null);
             return;

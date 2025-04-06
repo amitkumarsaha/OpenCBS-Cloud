@@ -2,6 +2,7 @@ package com.opencbs.core.domain;
 
 import com.opencbs.core.domain.enums.EventType;
 import com.opencbs.core.domain.json.ExtraJson;
+import com.opencbs.core.domain.json.ExtraJsonType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Type;
@@ -60,7 +61,7 @@ public abstract class BaseEvent extends BaseEntity {
     @Column(name = "rolled_back_date")
     private LocalDateTime rolledBackTime;
 
-    @Type(type = "ExtraJsonType")
+    @Type(value = ExtraJsonType.class)
     @Column(name = "extra", columnDefinition = "jsonb")
     private ExtraJson extra;
 }

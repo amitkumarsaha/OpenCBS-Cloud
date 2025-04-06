@@ -20,8 +20,9 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import java.text.SimpleDateFormat;
 
@@ -60,9 +61,8 @@ public class GeneralConfig {
     }
 
     @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        return multipartResolver;
+    public MultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 
 }

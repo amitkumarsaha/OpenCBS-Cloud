@@ -3,6 +3,7 @@ package com.opencbs.core.domain.json;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 import java.io.ByteArrayInputStream;
@@ -17,21 +18,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class ExtraJsonType implements UserType {
+public class ExtraJsonType implements IExtraJsonType{
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @Override
     public int[] sqlTypes() {
-        return new int[]{Types.JAVA_OBJECT};
+        return new int[]{getSqlType()};
     }
+
+    @Override
+    public int getSqlType() { return Types.JAVA_OBJECT; }
 
     @Override
     public Class<ExtraJson> returnedClass() {
         return ExtraJson.class;
     }
 
-    @Override
     public Object nullSafeGet(final ResultSet rs, final String[] names, final SessionImplementor session,
                               final Object owner) throws HibernateException, SQLException {
         final String cellContent = rs.getString(names[0]);
@@ -45,7 +47,6 @@ public class ExtraJsonType implements UserType {
         }
     }
 
-    @Override
     public void nullSafeSet(final PreparedStatement ps, final Object value, final int idx,
                             final SessionImplementor session) throws HibernateException, SQLException {
         if (value == null) {
@@ -111,6 +112,16 @@ public class ExtraJsonType implements UserType {
     @Override
     public int hashCode(final Object obj) throws HibernateException {
         return obj.hashCode();
+    }
+
+    @Override
+    public Object nullSafeGet(ResultSet resultSet, int i, SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SharedSessionContractImplementor sharedSessionContractImplementor) throws SQLException {
+
     }
 
 }

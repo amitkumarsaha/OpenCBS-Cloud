@@ -5,7 +5,7 @@ import com.opencbs.core.accounting.repositories.customs.AccountBalanceRepository
 import com.opencbs.core.repositories.Repository;
 import org.springframework.data.jpa.repository.Lock;
 
-import javax.persistence.LockModeType;
+import jakarta.persistence.LockModeType;
 import java.time.LocalDateTime;
 import java.util.Optional;
 

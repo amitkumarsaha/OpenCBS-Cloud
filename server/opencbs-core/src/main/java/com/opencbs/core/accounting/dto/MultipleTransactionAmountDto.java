@@ -3,8 +3,8 @@ package com.opencbs.core.accounting.dto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @RequiredArgsConstructor

@@ -6,6 +6,7 @@ import com.opencbs.core.domain.User;
 import com.opencbs.core.domain.enums.ModuleType;
 import com.opencbs.core.domain.json.ExtraJson;
 import com.opencbs.core.domain.json.ExtraJsonType;
+import com.opencbs.core.domain.json.IExtraJsonType;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -51,7 +52,7 @@ public class Request extends BaseEntity {
     @Column(name = "expire_date", nullable = false)
     private LocalDate expireDate;
 
-    @Type(type = "ExtraJsonType")
+    @Type(value = IExtraJsonType.class)
     @Column(name = "content", columnDefinition = "jsonb")
     private ExtraJson content;
 
