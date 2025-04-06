@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
+		<version>3.4.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -26,7 +26,7 @@
 		<hibernate-envers.version>5.4.1.Final</hibernate-envers.version>
 		<commons-fileupload.version>1.4</commons-fileupload.version>
 		<springfox-swagger.version>2.9.2</springfox-swagger.version>
-		<querydsl.version>4.2.1</querydsl.version>
+		<querydsl.version>5.1.0</querydsl.version>
 		<jasperreports.version>6.10.0</jasperreports.version>
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.2.1</thymeleaf-layout-dialect.version>
@@ -36,13 +36,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-
 		</dependency>
 
 		<dependency>
@@ -104,15 +102,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-java8</artifactId>
 		</dependency>
+		-->
 
+		<!--
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
+		-->
 
 		<dependency>
 			<groupId>com.itextpdf.tool</groupId>
@@ -199,7 +201,7 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<!-- <version>2.9.9</version> -->
+			<version>2.14.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -244,13 +246,13 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
-			<!-- <version>${querydsl.version}</version> -->
+			<version>${querydsl.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
-			<!-- <version>${querydsl.version}</version> -->
+			<version>${querydsl.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
