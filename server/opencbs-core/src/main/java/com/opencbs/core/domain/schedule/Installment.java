@@ -23,6 +23,7 @@ public class Installment {
     private BigDecimal paidPrincipal = BigDecimal.ZERO;
     private BigDecimal paidInterest = BigDecimal.ZERO;
 
+
     public BigDecimal getTotalDue() {
         return principal.add(interest).subtract(paidPrincipal.add(paidInterest));
     }

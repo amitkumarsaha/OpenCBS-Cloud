@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Where;
 
 import com.opencbs.core.domain.BaseEntity;

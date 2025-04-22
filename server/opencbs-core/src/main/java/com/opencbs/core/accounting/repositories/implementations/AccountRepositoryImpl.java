@@ -7,6 +7,7 @@ import com.opencbs.core.domain.Branch;
 import com.opencbs.core.domain.enums.AccountType;
 import com.opencbs.core.dto.requests.AccountRequest;
 import com.opencbs.core.repositories.implementations.BaseRepository;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -26,7 +27,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class AccountRepositoryImpl extends BaseRepository<Account> implements AccountRepositoryCustom {
 
-    @Autowired
     public AccountRepositoryImpl(EntityManager entityManager) {
         super(entityManager, Account.class);
     }

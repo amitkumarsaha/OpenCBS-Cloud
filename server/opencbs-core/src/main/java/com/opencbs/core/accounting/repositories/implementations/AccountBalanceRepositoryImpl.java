@@ -4,8 +4,8 @@ import com.opencbs.core.accounting.domain.AccountBalance;
 import com.opencbs.core.accounting.repositories.customs.AccountBalanceRepositoryCustom;
 import com.opencbs.core.repositories.implementations.BaseRepository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
